@@ -1,3 +1,7 @@
+import {searchPage} from "./searchPage.js";
+import {informationsPage} from "./informationsPage.js";
+import {resultPage} from "./resultPage.js";
+
 async function fetchGeocodage(adress) {
 
     const response = await fetch (`https://data.geopf.fr/geocodage/search?q=${adress}`);
@@ -8,6 +12,7 @@ console.log(data.features[0].geometry.coordinates);
 };
 
 fetchGeocodage("2 rue de la Baignade, 91130 Ris-Orangis");
+
 
 
 // on attend Vi pour cette section
