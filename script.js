@@ -5,12 +5,15 @@ const radiusCursor = document.getElementById("radius");
 const form = document.getElementById("submissionForm");
 const resultPage = document.getElementById("resultPage");
 const cinemaList = document.getElementById("cinemaList");
-const button = document.getElementById("btn")
+const button = document.getElementById("btn");
+const radius = document.getElementById("radius");
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     cinemaList.innerHTML = "";
-    searchEngine(input.value, 2);
+    searchEngine(input.value, radius.value);
+
+console.log("ceci est le radius de l'utilisateur :",radius.value);
 });
 
 async function searchEngine(address, radius) {
@@ -28,7 +31,7 @@ async function searchEngine(address, radius) {
         ${item.adresse}, ${item.commune}<br />
         <br>
         </li>`;
-    }
+    };
 
     // for (let i = 0; i < dataCinema.results.length; i++) {
     //     const cinema = dataCinema.results[i];
