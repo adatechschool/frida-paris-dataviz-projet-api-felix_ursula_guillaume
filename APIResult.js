@@ -1,4 +1,4 @@
-{
+export const APIResult =  {
     "total_count": 2061,
     "results": [
         {
