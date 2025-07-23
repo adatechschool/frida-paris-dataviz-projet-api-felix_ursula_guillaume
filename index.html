@@ -6,17 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ciné dans le coin (nom temporaire)</title>
     <script defer src="script.js" type="module"></script>
+    <!-- <script defer src="searchPage.js"></script> -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <div id="pagesBackground">
         <div id="searchPage">
-<h2 id=" welcomeMsg"></h2>
-<label for="address" aria-required="true">
-    <input type="search" id="adresse" placeholder="Tapez une adresse">
-</label>
-<div id ="suggestion"></div>
+            <h2 id=" welcomeMsg"></h2>
+            <form id="submissionForm">
+            <label for="address">
+                <input type="search" id="address" placeholder="Tapez une adresse" aria-required="true">
+            </label>
+            <div id="suggestion"></div>
+            <input type="range" id="radius" min="1" max="30">
+            <input type="submit" id="submissionBtn" name="submit">
+            </form>
         </div>
         <div id="resultPage"></div>
         <ul id="cinemaList"></ul>
