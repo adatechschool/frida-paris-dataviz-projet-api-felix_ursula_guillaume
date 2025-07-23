@@ -1,39 +1,48 @@
-export default resultPage;
+// export default resultPage;
+import { APIResult } from "./APIResult.js";
 
-  function affichCharge() {
-  const conteneur = document.getElementById("chargeDebut");
-  const chargement = document.createElement("p");
-  chargement.innerText = "Chargement des cinémas à proximité…";
-  conteneur.appendChild(chargement);
-}
-affichCharge();
-
-
-fetch('APIResult.json')
-  .then(response => response.json())
-  .then(data => {
-    console.log(typeof data);
-    // suite du code avec les données
-  });
-
-
-
-// function afficheListe(indice) {
-//     data.innerText = Quiz[indice].question;
-   
+//   function affichCharge() {
+//   const conteneur = document.getElementById("chargeDebut");
+//   const chargement = document.createElement("p");
+//   chargement.innerText = "Chargement des cinémas à proximité…";
+//   conteneur.appendChild(chargement);
 // }
+// affichCharge();
+
+// document.getElementById("chargeDebut").style.display = "none";
 
 
-    const offres = document.getElementById("resultPage")
-    for (let i = 0; i < data.length; i++) {
-    let titre = document.createElement("h2");
-    let description = document.createElement("p2");
+function cinemaList() {
+  const resultPage = document.getElementById("resultPage");
+  resultPage.innerHTML = '<h1 id=Titre>Voici les cinémas autour de chez toi</h1>';
 
-    titre.innerHTML = data[i].titre;
-    description.innerHTML = data[i].description;
+  const cinemaList = document.getElementById("cinemaList");
+    for (let i = 0; i < APIResult.results.length; i++) {
+    const cinema = APIResult.results[i];
 
-    offres.appendChild(titre);
-    offres.appendChild(description);
+    
+
+    cinemaList.innerHTML += `<li>
+        <button id= "btn"></button>
+        <strong>${cinema.nom}</strong><br />
+        ${cinema.adresse}, ${cinema.commune}<br />
+        <br>
+        </li>`;
+  }
 }
-document.getElementById("chargeDebut").style.display = "none";
-document.getElementById("chargeDebut").innerHTML = "";
+
+cinemaList();
+
+const button = document.getElementById("btn")
+
+function afficherPageInfo(){
+ button.addEventListener("click", () => {
+  document.getElementById("informationsPage").style.display = "block";
+  document.getElementById("resultPage").style.display = "none";
+ })
+}
+afficherPageInfo()
+
+
+
+
