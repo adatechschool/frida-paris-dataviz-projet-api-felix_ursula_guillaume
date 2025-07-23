@@ -1,4 +1,4 @@
-// export default resultPage;
+export default resultPage;
 import { APIResult } from "./APIResult.js";
 
 //   function affichCharge() {
@@ -17,10 +17,10 @@ function cinemaList() {
   resultPage.innerHTML = '<h1 id=Titre>Voici les cinémas autour de chez toi</h1>';
 
   const cinemaList = document.getElementById("cinemaList");
-    for (let i = 0; i < APIResult.results.length; i++) {
+  for (let i = 0; i < APIResult.results.length; i++) {
     const cinema = APIResult.results[i];
 
-    
+
 
     cinemaList.innerHTML += `<li>
         <button id= "btn"></button>
@@ -35,11 +35,11 @@ cinemaList();
 
 const button = document.getElementById("btn")
 
-function afficherPageInfo(){
- button.addEventListener("click", () => {
-  document.getElementById("informationsPage").style.display = "block";
-  document.getElementById("resultPage").style.display = "none";
- })
+function afficherPageInfo() {
+  button.addEventListener("click", () => {
+    document.getElementById("informationsPage").style.display = "block";
+    document.getElementById("resultPage").style.display = "none";
+  })
 }
 afficherPageInfo()
 
