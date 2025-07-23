@@ -1,6 +1,6 @@
 // import { searchPage } from "./searchPage.js";
-// import { resultPage } from "./resultPage.js";
-import { informationsPage } from "./informationsPage.js";
+import { resultPage } from "./resultPage.js";
+// import { informationsPage } from "./informationsPage.js";
 import { APIResult } from "./APIResult.js";
 console.log(APIResult);
 
