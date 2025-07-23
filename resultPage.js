@@ -17,8 +17,8 @@ function cinemaList() {
   resultPage.innerHTML = '<h1 id=Titre>Voici les cinémas autour de chez toi</h1>';
 
   const cinemaList = document.getElementById("cinemaList");
-  for (let i = 0; i < APIResult.results.length; i++) {
-    const cinema = APIResult.results[i];
+  for (let i = 0; i < results.length; i++) {
+    const cinema = results[i];
 
 
 

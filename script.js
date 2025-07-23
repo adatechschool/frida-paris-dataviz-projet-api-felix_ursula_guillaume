@@ -7,6 +7,7 @@ const form = document.getElementById("submissionForm");
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     searchEngine(input.value, 2);
+    
 })
 
 async function searchEngine(address, radius) {
@@ -19,8 +20,28 @@ async function searchEngine(address, radius) {
     const responseCinema = await fetch(`https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom%27POINT(${longitude}%20${latitude})%27%2C%20${radius}km))&limit=20`);
     const dataCinema = await responseCinema.json();
 
-    console.log(dataCinema);
+    return(dataCinema);
 };
+
+
+function cinemaList() {
+  const resultPage = document.getElementById("resultPage");
+  resultPage.innerHTML = '<h1 id=Titre>Voici les cinémas autour de chez toi</h1>'; 
+  const cinemaList = document.getElementById("cinemaList");
+  for (let i = 0; i < dataCinema.results.length; i++) {
+    const cinema = dataCinema.results[i];
+
+
+    cinemaList.innerHTML += `<li>
+        <button id= "btn"></button>
+        <strong>${cinema.nom}</strong><br />
+        ${cinema.adresse}, ${cinema.commune}<br />
+        <br>
+        </li>`;
+  }
+}
+
+cinemaList();
 
 /*input.addEventListener("input", async function () {
     const inputAdded = input.value.trim();
@@ -49,3 +70,4 @@ async function searchEngine(address, radius) {
         suggestionDiv.innerHTML = "<div>Erreur lors du chargement des suggestions</div>";
     }
 });*/
+
