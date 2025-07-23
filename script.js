@@ -12,7 +12,7 @@ form.addEventListener("submit", (event) => {
 async function searchEngine(address, radius) {
     const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address}`);
     const dataCoord = await responseCoord.json();
-    await console.log("voici les cinémas trouvés à proximité de l'adresse :", dataCoord.features[0].properties.label);
+     console.log("voici les cinémas trouvés à proximité de l'adresse :", dataCoord.features[0].properties.label);
     let coord = dataCoord.features[0].geometry.coordinates;
     let longitude = coord[0];
     let latitude = coord[1];
