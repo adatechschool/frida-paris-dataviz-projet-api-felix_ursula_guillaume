@@ -3,12 +3,15 @@ const suggestionDiv = document.getElementById("suggestion");
 const submit = document.getElementById("submissionBtn");
 const radiusCursor = document.getElementById("radius");
 const form = document.getElementById("submissionForm");
+const resultPage = document.getElementById("resultPage");
+const cinemaList = document.getElementById("cinemaList");
+const button = document.getElementById("btn")
 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
+    cinemaList.innerHTML = "";
     searchEngine(input.value, 2);
-    
-})
+});
 
 async function searchEngine(address, radius) {
     const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address}`);
@@ -19,29 +22,33 @@ async function searchEngine(address, radius) {
     let latitude = coord[1];
     const responseCinema = await fetch(`https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom%27POINT(${longitude}%20${latitude})%27%2C%20${radius}km))&limit=20`);
     const dataCinema = await responseCinema.json();
-
-    return(dataCinema);
-};
-
-
-function cinemaList() {
-  const resultPage = document.getElementById("resultPage");
-  resultPage.innerHTML = '<h1 id=Titre>Voici les cinémas autour de chez toi</h1>'; 
-  const cinemaList = document.getElementById("cinemaList");
-  for (let i = 0; i < dataCinema.results.length; i++) {
-    const cinema = dataCinema.results[i];
-
-
-    cinemaList.innerHTML += `<li>
-        <button id= "btn"></button>
-        <strong>${cinema.nom}</strong><br />
-        ${cinema.adresse}, ${cinema.commune}<br />
+    console.log(dataCinema);
+    for (const item of dataCinema.results) {
+        cinemaList.innerHTML += `<li>${item.nom}<br />
+        ${item.adresse}, ${item.commune}<br />
         <br>
         </li>`;
-  }
-}
+    }
 
-cinemaList();
+    // for (let i = 0; i < dataCinema.results.length; i++) {
+    //     const cinema = dataCinema.results[i];
+    //     cinemaList.innerHTML += `<li>
+    //     <button id= "btn"></button>
+    //     <strong>${cinema.nom}</strong><br />
+    //     ${cinema.adresse}, ${cinema.commune}<br />
+    //     <br>
+    //     </li>`;
+    // }
+};
+
+function afficherPageInfo() {
+    button.addEventListener("click", () => {
+        document.getElementById("informationsPage").style.display = "block";
+        document.getElementById("resultPage").style.display = "none";
+    })
+}
+afficherPageInfo()
+
 
 /*input.addEventListener("input", async function () {
     const inputAdded = input.value.trim();

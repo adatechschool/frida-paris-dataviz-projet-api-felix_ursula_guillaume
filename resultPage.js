@@ -12,36 +12,7 @@ import { APIResult } from "./APIResult.js";
 // document.getElementById("chargeDebut").style.display = "none";
 
 
-function cinemaList() {
-  const resultPage = document.getElementById("resultPage");
-  resultPage.innerHTML = '<h1 id=Titre>Voici les cinémas autour de chez toi</h1>';
 
-  const cinemaList = document.getElementById("cinemaList");
-  for (let i = 0; i < results.length; i++) {
-    const cinema = results[i];
-
-
-
-    cinemaList.innerHTML += `<li>
-        <button id= "btn"></button>
-        <strong>${cinema.nom}</strong><br />
-        ${cinema.adresse}, ${cinema.commune}<br />
-        <br>
-        </li>`;
-  }
-}
-
-cinemaList();
-
-const button = document.getElementById("btn")
-
-function afficherPageInfo() {
-  button.addEventListener("click", () => {
-    document.getElementById("informationsPage").style.display = "block";
-    document.getElementById("resultPage").style.display = "none";
-  })
-}
-afficherPageInfo()
 
 
 
