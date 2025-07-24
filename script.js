@@ -2,10 +2,14 @@ const addressInput = document.getElementById("addressInput");
 const suggestion = document.getElementById("suggestion");
 const radius = document.getElementById("radius");
 const form = document.getElementById("submissionForm");
-const resultPage = document.getElementById("resultPage");
 const cinemaList = document.getElementById("cinemaList");
-const informationsPage = document.getElementById("informationsPage");
 const resultAddress = document.getElementById("resultAddress");
+const searchPage = document.getElementById("searchPage");
+const resultPage = document.getElementById("resultPage");
+const informationsPage = document.getElementById("informationsPage");
+const previousButton = document.getElementById("previousButton");
+
+let currentPage = 1;
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -30,8 +34,6 @@ form.addEventListener("submit", async (event) => {
     }
 
     displayCinema(cinemas);
-    document.getElementById("resultPage").style.display = "block";
-    document.getElementById("searchPage").style.display = "none";
 });
 
 async function getCoordinates(address) {
@@ -59,6 +61,12 @@ async function getCinema(longitude, latitude, radius) {
 };
 
 function displayCinema(cinemas) {
+
+    currentPage = 2;
+    searchPage.style.display = "none";
+    resultPage.style.display = "block";
+    previousButton.style.display = "block";
+
     for (const item of cinemas) {
         const button = document.createElement("button");
         button.className = "cinemaButton";
@@ -69,13 +77,16 @@ function displayCinema(cinemas) {
         });
 
         cinemaList.appendChild(button);
-        document.getElementById("informationsPage").style.display = "block";
-       ;
+        informationsPage.style.display = "block";
+        ;
     }
 };
 
 function showCinemaInformations(cinema) {
-    document.getElementById("resultPage").style.display = "none"
+
+    currentPage = 3;
+    resultPage.style.display = "none";
+
     informationsPage.innerHTML = `
         <h2 id="InformationsPageTitle">${cinema.nom}</h2>
         <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
@@ -84,6 +95,22 @@ function showCinemaInformations(cinema) {
         <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
     `;
 };
+
+function toPreviousPage() {
+    previousButton.addEventListener("click", () => {
+        if (currentPage === 3) {
+            informationsPage.style.display = "none";
+            resultPage.style.display = "block";
+            currentPage = 2;
+        } else if (currentPage === 2) {
+            resultPage.style.display = "none";
+            previousButton.style.display = "none";
+            searchPage.style.display = "block";
+            currentPage = 1;
+        }
+    });
+};
+toPreviousPage();
 
 /*input.addEventListener("input", async function () {
     const inputAdded = input.value.trim();
