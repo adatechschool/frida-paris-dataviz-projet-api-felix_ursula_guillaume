@@ -1,4 +1,4 @@
-// export default resultPage;
+export default resultPage;
 import { APIResult } from "./APIResult.js";
 
   function affichCharge() {
