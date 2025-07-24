@@ -107,13 +107,13 @@ function toPreviousPage() {
             previousButton.style.display = "none";
             searchPage.style.display = "block";
             currentPage = 1;
-        }
+        };
     });
 };
 toPreviousPage();
 
-/*input.addEventListener("input", async function () {
-    const inputAdded = input.value.trim();
+addressInput.addEventListener("input", async function () {
+    const inputAdded = addressInput.value.trim();
 
     if (inputAdded.length < 3) {
         suggestion.innerHTML = "";
@@ -147,4 +147,3 @@ toPreviousPage();
         suggestion.innerHTML = "<div>Erreur lors du chargement des suggestions</div>";
     }
 });
-*/
