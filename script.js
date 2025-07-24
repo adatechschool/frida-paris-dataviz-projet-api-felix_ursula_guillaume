@@ -119,19 +119,31 @@ toPreviousPage();
         suggestion.innerHTML = "";
         return;
     }
+
     try {
-        const response = await fetch(`https://data.geopf.fr/geocodage/search?index=address&q=${encodeURIComponent(inputAdded)}&limit=5 `)
+        const response = await fetch(`https://data.geopf.fr/geocodage/search?index=address&q=${encodeURIComponent(inputAdded)}&limit=5`);
         if (!response.ok) throw new Error("Erreur lors de la récupération");
         const data = await response.json();
-        suggestion.innerHTML = "";
-        data.features.forEach(feature => {
-        const newDiv = document.createElement("div");
-        newDiv.textContent=feature.properties.label;
-        newDiv.addEventListener("click" , () =>{
-        input.value = feature.properties.label;
-        suggestion.innerHTML="";
-        });
 
-        cinemaList.appendChild(button);
+        suggestion.innerHTML = "";
+
+        if (!data.features || data.features.length === 0) {
+            suggestion.innerHTML = "<div>Aucun résultat</div>";
+            return;
+        }
+
+        data.features.forEach(feature => {
+            const newDiv = document.createElement("div");
+            newDiv.textContent = feature.properties.label;
+            newDiv.style.cursor = "pointer";
+            newDiv.addEventListener("click", () => {
+                addressInput.value = feature.properties.label;
+                suggestion.innerHTML = "";
+            });
+            suggestion.appendChild(newDiv);
+        });
+    } catch (error) {
+        console.error("Erreur :", error);
+        suggestion.innerHTML = "<div>Erreur lors du chargement des suggestions</div>";
     }
-});*/
+});
