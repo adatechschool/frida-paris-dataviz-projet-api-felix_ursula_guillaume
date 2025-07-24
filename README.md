@@ -2,14 +2,15 @@
 
 ## 24/07/25
 
-à faire aujourd'hui :
+à faire :
 
-coder la page info (créer des liens dynamiques vers Google)
-
+refactorer le code pour distinguer les fonctions individuellement
 calculer les distances entre l'adresse saisie et chaque cinéma (l'afficher sur la liste des cinémas)
 faire des recherches pour rendre fonctionnelle l'auto-complétion
 mettre en place le display permettant de naviguer fenêtre après fenêtre
+réafficher la page de chargement
 ajouter un bouton précédent pour revenir en arrière
+
 
 ## 23/07/25
 Nous avons mis en commun nos travaux distincts sur les différentes pages de l'application\
