@@ -6,6 +6,15 @@ const resultPage = document.getElementById("resultPage");
 const cinemaList = document.getElementById("cinemaList");
 const informationsPage = document.getElementById("informationsPage");
 const resultAddress = document.getElementById("resultAddress");
+const loader = document.getElementById("charger");
+
+
+function affichCharge() {
+const chargement = document.createElement("p");
+chargement.innerText = "Chargement des cinémas à proximité…";
+loader.appendChild(chargement);
+}
+
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -29,13 +38,16 @@ form.addEventListener("submit", async (event) => {
         resultAddress.innerText = `Aucun cinéma trouvé à proximité de ${label} dans un rayon de ${currentRadius} km.`;
         return;
     }
-
+   
     displayCinema(cinemas);
-    document.getElementById("resultPage").style.display = "block";
-    document.getElementById("searchPage").style.display = "none";
+   
 });
 
+
+
+
 async function getCoordinates(address) {
+     affichCharge();
     const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address}`);
     const dataCoord = await responseCoord.json();
 
@@ -60,6 +72,9 @@ async function getCinema(longitude, latitude, radius) {
 }
 
 function displayCinema(cinemas) {
+    document.getElementById("resultPage").style.display = "block";
+    document.getElementById("searchPage").style.display = "none";
+
     for (const item of cinemas) {
         const button = document.createElement("button");
         button.className = "cinemaButton";
@@ -73,6 +88,7 @@ function displayCinema(cinemas) {
         document.getElementById("informationsPage").style.display = "block";
        ;
     }
+    loader.style.display = "none"
 }
 
 function showCinemaInformations(cinema) {
@@ -85,6 +101,9 @@ function showCinemaInformations(cinema) {
         <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
     `;
 }
+
+
+
 
 // function afficherPageInfo() {
 //     button.addEventListener("click", () => {
