@@ -1,10 +1,12 @@
 # Ciné du coin : Application web requête API
 
 ## 24/07/25
+Nous avons créé les boutons de chaque cinéma dans le périmètre\
+Nous avons programmé le comportement des boutons pour qu'ils affichent les informations du cinéma séléctionné\
+Nous avons refactorisé le code pour séparer les fonctions\
 
 à faire :
 
-refactorer le code pour distinguer les fonctions individuellement
 calculer les distances entre l'adresse saisie et chaque cinéma (l'afficher sur la liste des cinémas)
 faire des recherches pour rendre fonctionnelle l'auto-complétion
 mettre en place le display permettant de naviguer fenêtre après fenêtre

@@ -10,13 +10,12 @@ const resultAddress = document.getElementById("resultAddress");
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
     cinemaList.innerHTML = "";
-    informationsPage.innerHTML = ""; // Clear previous information
+    informationsPage.innerHTML = "";
     const address = addressInput.value;
     const currentRadius = radius.value;
 
     const coordinates = await getCoordinates(address);
     if (!coordinates) {
-        console.log("Aucune coordonnée trouvée pour cette adresse.");
         resultAddress.innerText = "Aucune coordonnée trouvée pour cette adresse.";
         return;
     }
@@ -47,15 +46,15 @@ async function getCoordinates(address) {
     const label = dataCoord.features[0].properties.label;
 
     return { longitude, latitude, label };
-}
+};
 
 async function getCinema(longitude, latitude, radius) {
     const responseCinema = await fetch(
         `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom'POINT(${longitude}%20${latitude})'%2C%20${radius}km))&limit=20`
     );
     const dataCinema = await responseCinema.json();
-    return dataCinema.results || [];
-}
+    return dataCinema.results;
+};
 
 function displayCinema(cinemas) {
     for (const item of cinemas) {
@@ -69,7 +68,7 @@ function displayCinema(cinemas) {
 
         cinemaList.appendChild(button);
     }
-}
+};
 
 function showCinemaInformations(cinema) {
     informationsPage.innerHTML = `
@@ -79,17 +78,7 @@ function showCinemaInformations(cinema) {
         <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
         <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
     `;
-}
-
-// function afficherPageInfo() {
-//     button.addEventListener("click", () => {
-//         document.getElementById("informationsPage").style.display = "block";
-//         document.getElementById("resultPage").style.display = "none";
-//     })
-// }
-// afficherPageInfo()
-
-
+};
 
 /*input.addEventListener("input", async function () {
     const inputAdded = input.value.trim();
