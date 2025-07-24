@@ -37,7 +37,7 @@ async function searchEngine(address, radius) {
         const button = document.createElement("button");
         button.className = "cinemaButton";
         button.innerHTML = `${item.nom}<br/>${item.adresse}, ${item.commune}`;
-        
+
         button.addEventListener("click", () => {
             informationsPage.innerHTML = `
                 <h1 id="InformationsPageTitle">${item.nom}</h1>
@@ -49,4 +49,38 @@ async function searchEngine(address, radius) {
 
         cinemaList.appendChild(button);
     }
-}
+};
+
+// function afficherPageInfo() {
+//     button.addEventListener("click", () => {
+//         document.getElementById("informationsPage").style.display = "block";
+//         document.getElementById("resultPage").style.display = "none";
+//     })
+// }
+// afficherPageInfo()
+
+
+
+/*input.addEventListener("input", async function () {
+    const inputAdded = input.value.trim();
+
+    if (inputAdded.length < 3) {
+        suggestionDiv.innerHTML = "";
+        return;
+    }
+    try {
+        const response = await fetch(`https://data.geopf.fr/geocodage/search?index=address&q=${encodeURIComponent(inputAdded)}&limit=5 `)
+        if (!response.ok) throw new Error("Erreur lors de la récupération");
+        const data = await response.json();
+        suggestionDiv.innerHTML = "";
+        data.features.forEach(feature => {
+        const newDiv = document.createElement("div");
+        newDiv.textContent=feature.properties.label;
+        newDiv.addEventListener("click" , () =>{
+        input.value = feature.properties.label;
+        suggestionDiv.innerHTML="";
+        });
+
+        cinemaList.appendChild(button);
+    }
+});*/

@@ -1,11 +1,24 @@
 # Ciné du coin : Application web requête API
+
+## 24/07/25
+
+à faire aujourd'hui :
+
+coder la page info (créer des liens dynamiques vers Google)
+
+calculer les distances entre l'adresse saisie et chaque cinéma (l'afficher sur la liste des cinémas)
+faire des recherches pour rendre fonctionnelle l'auto-complétion
+mettre en place le display permettant de naviguer fenêtre après fenêtre
+ajouter un bouton précédent pour revenir en arrière
+
 ## 23/07/25
 Nous avons mis en commun nos travaux distincts sur les différentes pages de l'application\
 Nous avons résolu la mise en lien entre les deux API, dans une fonction searchEngine\
-Nous avons connecté la fonction searchEngine au DOM pour l'utiliser dans le navigateur
+Nous avons connecté la fonction searchEngine au DOM pour l'utiliser dans le navigateur\
+Nous avons rendu fonctionnel le slider qui permet à l'utilisateur de déterminer le rayon de sa recherche
 ## 22/07/25
 Nous avons commencé à créer les fonctions de notre application\
-Nous avons créé trois différentes pages : searchPage, resultsPage et statsPage\
+Nous avons créé trois différentes pages : searchPage, resultsPage et informationsPage\
 Nous avons eu un soucis pour envoyer des paramètres SQL dans l'API cinéma
 ## 21/07/25
 Nous avons choisi le thème du projet\
