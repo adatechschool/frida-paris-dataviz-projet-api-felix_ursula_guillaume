@@ -2,7 +2,6 @@
 
 ## à faire :
 calculer les distances entre l'adresse saisie et chaque cinéma (l'afficher sur la liste des cinémas)
-réafficher la page de chargement
 
 ## 24/07/25
 Nous avons créé les boutons de chaque cinéma dans le périmètre\
@@ -10,7 +9,8 @@ Nous avons programmé le comportement des boutons pour qu'ils affichent les info
 Nous avons refactorisé le code pour séparer les fonctions\
 Nous avons mis en place le display permettant de naviguer fenêtre après fenêtre\
 Nous avons réussi l'exploit de faire fonctionner l'auto-complétion\
-Nous avons ajouté un bouton précédent pour revenir en arrière
+Nous avons ajouté un bouton précédent pour revenir en arrière\
+Nous avons réaffiché la page de chargement avant l'arrivée des résultats
 ## 23/07/25
 Nous avons mis en commun nos travaux distincts sur les différentes pages de l'application\
 Nous avons résolu la mise en lien entre les deux API, dans une fonction searchEngine\
