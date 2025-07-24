@@ -147,3 +147,4 @@ toPreviousPage();
         suggestion.innerHTML = "<div>Erreur lors du chargement des suggestions</div>";
     }
 });
+*/
