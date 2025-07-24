@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ciné dans le coin (nom temporaire)</title>
+    <title>CinéDuCoin</title>
     <script defer src="script.js" type="module"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,10 +12,10 @@
 <body>
     <div id="pagesBackground">
         <div id="searchPage">
-            <h2 id=" welcomeMsg"></h2>
+            <h1 id=" welcomeMsg">Bienvenue dans CinéDuCoin</h1>
             <form id="submissionForm">
                 <label for="address">
-                    <input type="search" id="address" placeholder="Tapez une adresse" aria-required="true">
+                    <input type="search" id="addressInput" placeholder="Tapez une adresse" aria-required="true">
                 </label>
                 <div id="suggestion"></div>
                 <input type="range" id="radius" value="3" min="1" max="30"
@@ -25,6 +25,7 @@
             </form>
         </div>
         <div id="resultPage">
+            <h2 id="resultAddress"></h2>
             <ul id="cinemaList"></ul>
         </div>
 
