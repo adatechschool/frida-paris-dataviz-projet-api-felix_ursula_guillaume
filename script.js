@@ -2,11 +2,15 @@ const addressInput = document.getElementById("addressInput");
 const suggestion = document.getElementById("suggestion");
 const radius = document.getElementById("radius");
 const form = document.getElementById("submissionForm");
-const resultPage = document.getElementById("resultPage");
 const cinemaList = document.getElementById("cinemaList");
-const informationsPage = document.getElementById("informationsPage");
 const resultAddress = document.getElementById("resultAddress");
+const searchPage = document.getElementById("searchPage");
+const resultPage = document.getElementById("resultPage");
+const informationsPage = document.getElementById("informationsPage");
+const previousButton = document.getElementById("previousButton");
 const loader = document.getElementById("charger");
+
+let currentPage = 1;
 
 
 function affichCharge() {
@@ -19,13 +23,12 @@ loader.appendChild(chargement);
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
     cinemaList.innerHTML = "";
-    informationsPage.innerHTML = ""; 
+    informationsPage.innerHTML = "";
     const address = addressInput.value;
     const currentRadius = radius.value;
 
     const coordinates = await getCoordinates(address);
     if (!coordinates) {
-        console.log("Aucune coordonnée trouvée pour cette adresse.");
         resultAddress.innerText = "Aucune coordonnée trouvée pour cette adresse.";
         return;
     }
@@ -40,7 +43,6 @@ form.addEventListener("submit", async (event) => {
     }
    
     displayCinema(cinemas);
-   
 });
 
 
@@ -61,19 +63,22 @@ async function getCoordinates(address) {
     const label = dataCoord.features[0].properties.label;
 
     return { longitude, latitude, label };
-}
+};
 
 async function getCinema(longitude, latitude, radius) {
     const responseCinema = await fetch(
         `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom'POINT(${longitude}%20${latitude})'%2C%20${radius}km))&limit=20`
     );
     const dataCinema = await responseCinema.json();
-    return dataCinema.results || [];
-}
+    return dataCinema.results;
+};
 
 function displayCinema(cinemas) {
-    document.getElementById("resultPage").style.display = "block";
-    document.getElementById("searchPage").style.display = "none";
+
+    currentPage = 2;
+    searchPage.style.display = "none";
+    resultPage.style.display = "block";
+    previousButton.style.display = "block";
 
     for (const item of cinemas) {
         const button = document.createElement("button");
@@ -85,14 +90,17 @@ function displayCinema(cinemas) {
         });
 
         cinemaList.appendChild(button);
-        document.getElementById("informationsPage").style.display = "block";
-       ;
+        informationsPage.style.display = "block";
+        ;
     }
     loader.style.display = "none"
 }
 
 function showCinemaInformations(cinema) {
-    document.getElementById("resultPage").style.display = "none"
+
+    currentPage = 3;
+    resultPage.style.display = "none";
+
     informationsPage.innerHTML = `
         <h2 id="InformationsPageTitle">${cinema.nom}</h2>
         <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
@@ -100,41 +108,56 @@ function showCinemaInformations(cinema) {
         <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
         <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
     `;
-}
+};
 
+function toPreviousPage() {
+    previousButton.addEventListener("click", () => {
+        if (currentPage === 3) {
+            informationsPage.style.display = "none";
+            resultPage.style.display = "block";
+            currentPage = 2;
+        } else if (currentPage === 2) {
+            resultPage.style.display = "none";
+            previousButton.style.display = "none";
+            searchPage.style.display = "block";
+            currentPage = 1;
+        }
+    });
+};
+toPreviousPage();
 
-
-
-// function afficherPageInfo() {
-//     button.addEventListener("click", () => {
-//         document.getElementById("informationsPage").style.display = "block";
-//         document.getElementById("resultPage").style.display = "none";
-//     })
-// }
-// afficherPageInfo()
-
-
-
-/*input.addEventListener("input", async function () {
-    const inputAdded = input.value.trim();
+addressInput.addEventListener("input", async function () {
+    const inputAdded = addressInput.value.trim();
 
     if (inputAdded.length < 3) {
         suggestion.innerHTML = "";
         return;
     }
+
     try {
-        const response = await fetch(`https://data.geopf.fr/geocodage/search?index=address&q=${encodeURIComponent(inputAdded)}&limit=5 `)
+        const response = await fetch(`https://data.geopf.fr/geocodage/search?index=address&q=${encodeURIComponent(inputAdded)}&limit=5`);
         if (!response.ok) throw new Error("Erreur lors de la récupération");
         const data = await response.json();
-        suggestion.innerHTML = "";
-        data.features.forEach(feature => {
-        const newDiv = document.createElement("div");
-        newDiv.textContent=feature.properties.label;
-        newDiv.addEventListener("click" , () =>{
-        input.value = feature.properties.label;
-        suggestion.innerHTML="";
-        });
 
-        cinemaList.appendChild(button);
+        suggestion.innerHTML = "";
+
+        if (!data.features || data.features.length === 0) {
+            suggestion.innerHTML = "<div>Aucun résultat</div>";
+            return;
+        }
+
+        data.features.forEach(feature => {
+            const newDiv = document.createElement("div");
+            newDiv.textContent = feature.properties.label;
+            newDiv.style.cursor = "pointer";
+            newDiv.addEventListener("click", () => {
+                addressInput.value = feature.properties.label;
+                suggestion.innerHTML = "";
+            });
+            suggestion.appendChild(newDiv);
+        });
+    } catch (error) {
+        console.error("Erreur :", error);
+        suggestion.innerHTML = "<div>Erreur lors du chargement des suggestions</div>";
     }
-});*/
+});

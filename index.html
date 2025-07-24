@@ -17,7 +17,8 @@
                 <label for="address">
                     <input type="search" id="addressInput" placeholder="Tapez une adresse" aria-required="true">
                 </label>
-                <div id="suggestion"></div>
+                <div id="suggestion" ></div>
+
                 <input type="range" id="radius" value="3" min="1" max="30"
                     oninput="this.nextElementSibling.value = this.value">
                 <output>3</output>km<br />
@@ -32,6 +33,9 @@
 
         <div id="informationsPage">
         </div>
+
+
+        <button id="previousButton">page précédente</button>
     </div>
 </body>
 
