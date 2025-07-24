@@ -10,7 +10,7 @@ const resultAddress = document.getElementById("resultAddress");
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
     cinemaList.innerHTML = "";
-    informationsPage.innerHTML = ""; // Clear previous information
+    informationsPage.innerHTML = ""; 
     const address = addressInput.value;
     const currentRadius = radius.value;
 
@@ -31,6 +31,8 @@ form.addEventListener("submit", async (event) => {
     }
 
     displayCinema(cinemas);
+    document.getElementById("resultPage").style.display = "block";
+    document.getElementById("searchPage").style.display = "none";
 });
 
 async function getCoordinates(address) {
@@ -68,10 +70,13 @@ function displayCinema(cinemas) {
         });
 
         cinemaList.appendChild(button);
+        document.getElementById("informationsPage").style.display = "block";
+       ;
     }
 }
 
 function showCinemaInformations(cinema) {
+    document.getElementById("resultPage").style.display = "none"
     informationsPage.innerHTML = `
         <h2 id="InformationsPageTitle">${cinema.nom}</h2>
         <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
