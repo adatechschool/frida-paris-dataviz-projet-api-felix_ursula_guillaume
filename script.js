@@ -112,8 +112,8 @@ function toPreviousPage() {
 };
 toPreviousPage();
 
-/*input.addEventListener("input", async function () {
-    const inputAdded = input.value.trim();
+addressInput.addEventListener("input", async function () {
+    const inputAdded = addressInput.value.trim();
 
     if (inputAdded.length < 3) {
         suggestion.innerHTML = "";
