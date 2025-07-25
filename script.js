@@ -8,8 +8,17 @@ const searchPage = document.getElementById("searchPage");
 const resultPage = document.getElementById("resultPage");
 const informationsPage = document.getElementById("informationsPage");
 const previousButton = document.getElementById("previousButton");
+const loader = document.getElementById("charger");
 
 let currentPage = 1;
+
+
+function affichCharge() {
+const chargement = document.createElement("p");
+chargement.innerText = "Chargement des cinémas à proximité…";
+loader.appendChild(chargement);
+}
+
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -32,11 +41,15 @@ form.addEventListener("submit", async (event) => {
         resultAddress.innerText = `Aucun cinéma trouvé à proximité de ${label} dans un rayon de ${currentRadius} km.`;
         return;
     }
-
+   
     displayCinema(cinemas);
 });
 
+
+
+
 async function getCoordinates(address) {
+     affichCharge();
     const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address}`);
     const dataCoord = await responseCoord.json();
 
@@ -80,7 +93,8 @@ function displayCinema(cinemas) {
         informationsPage.style.display = "block";
         ;
     }
-};
+    loader.style.display = "none"
+}
 
 function showCinemaInformations(cinema) {
 
