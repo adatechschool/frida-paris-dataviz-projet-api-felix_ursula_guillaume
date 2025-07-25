@@ -1,29 +1,30 @@
 # Ciné du coin : Application web requête API
 
+## à faire :
+Calculer les distances entre l'adresse saisie et chaque cinéma (l'afficher sur la liste des cinémas)
+Afficher les cinémas dans l'ordre de distance, le plus proche en premier
+
+## 25/07/25
+
+
 ## 24/07/25
-Nous avons créé les boutons de chaque cinéma dans le périmètre\
-Nous avons programmé le comportement des boutons pour qu'ils affichent les informations du cinéma séléctionné\
-Nous avons refactorisé le code pour séparer les fonctions\
-
-à faire :
-
-calculer les distances entre l'adresse saisie et chaque cinéma (l'afficher sur la liste des cinémas)
-faire des recherches pour rendre fonctionnelle l'auto-complétion
-mettre en place le display permettant de naviguer fenêtre après fenêtre
-réafficher la page de chargement
-ajouter un bouton précédent pour revenir en arrière
-
-
+Création des boutons de chaque cinéma dans le périmètre\
+Programmation du comportement des boutons pour qu'ils affichent les informations du cinéma séléctionné\
+Refactorisation du code pour séparer les fonctions, division de la fonction searchEngine en quatres fonctions distinctes\
+Mise en place du display: none/block permettant de naviguer fenêtre après fenêtre\
+Mise en place de l'auto-complétion des champs de recherches\
+Ajout du bouton précédent pour revenir en arrière\
+Mise en place de l'écran de chargement avant l'arrivée des résultats
 ## 23/07/25
-Nous avons mis en commun nos travaux distincts sur les différentes pages de l'application\
-Nous avons résolu la mise en lien entre les deux API, dans une fonction searchEngine\
-Nous avons connecté la fonction searchEngine au DOM pour l'utiliser dans le navigateur\
-Nous avons rendu fonctionnel le slider qui permet à l'utilisateur de déterminer le rayon de sa recherche
+Mise en commun des travaux distincts sur les différentes pages de l'application\
+Résolution de la mise en lien entre les deux API, dans une fonction searchEngine (avec l'aide de Vi)\
+Mise en lien de la fonction searchEngine au DOM pour l'utiliser dans le navigateur\
+Mise en fonction du slider qui permet à l'utilisateur de déterminer le rayon de sa recherche
 ## 22/07/25
-Nous avons commencé à créer les fonctions de notre application\
-Nous avons créé trois différentes pages : searchPage, resultsPage et informationsPage\
-Nous avons eu un soucis pour envoyer des paramètres SQL dans l'API cinéma
+Création des fonctions de base de notre application\
+Création de trois différentes pages : searchPage, resultsPage et informationsPage\
+Recherches pour régler un soucis d'envoyer des paramètres SQL dans l'API cinéma
 ## 21/07/25
-Nous avons choisi le thème du projet\
-Nous avons trouvé des APIs publiques et gratuites : https://geoservices.ign.fr/ et https://data.culture.gouv.fr/explore/dataset/etablissements-cinematographiques/. La première transforme une adresse rédigée par un utilisateur en coordonées géographiques. La deuxième indique les cinémas de France, et peut admettre un paramètre de localisation par coordonnées géographiques.
-Nous avons posé les bases du projet en créant un répertoire et en préparant les fichiers html, js et css
+Choix du thème du projet\
+Recherche des APIs publiques et gratuites : https://geoservices.ign.fr/ et https://data.culture.gouv.fr/explore/dataset/etablissements-cinematographiques/. La première transforme une adresse rédigée par un utilisateur en coordonées géographiques. La deuxième indique les cinémas de France, et peut admettre un paramètre de localisation par coordonnées géographiques.\
+Identification des objectifs du projet et création du répertoire (fichiers html, js et css)

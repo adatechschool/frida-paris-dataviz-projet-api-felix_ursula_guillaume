@@ -12,13 +12,11 @@ const loader = document.getElementById("charger");
 
 let currentPage = 1;
 
-
 function affichCharge() {
 const chargement = document.createElement("p");
 chargement.innerText = "Chargement des cinémas à proximité…";
 loader.appendChild(chargement);
 }
-
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -45,9 +43,6 @@ form.addEventListener("submit", async (event) => {
     displayCinema(cinemas);
 });
 
-
-
-
 async function getCoordinates(address) {
      affichCharge();
     const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address}`);
@@ -67,7 +62,7 @@ async function getCoordinates(address) {
 
 async function getCinema(longitude, latitude, radius) {
     const responseCinema = await fetch(
-        `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom'POINT(${longitude}%20${latitude})'%2C%20${radius}km))&limit=20`
+        `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom%27POINT(${longitude}%20${latitude})%27%2C%20${radius}km))&order_by=distance(%60geolocalisation%60%2C%20geom%27POINT(${longitude}%20${latitude})%27)%20ASC&limit=20`
     );
     const dataCinema = await responseCinema.json();
     return dataCinema.results;
@@ -121,7 +116,7 @@ function toPreviousPage() {
             previousButton.style.display = "none";
             searchPage.style.display = "block";
             currentPage = 1;
-        }
+        };
     });
 };
 toPreviousPage();
