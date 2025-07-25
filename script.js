@@ -83,7 +83,7 @@ function displayCinema(cinemas) {
     for (const item of cinemas) {
         const button = document.createElement("button");
         button.className = "cinemaButton";
-        button.innerHTML = `${item.nom}<br/>${item.adresse}, ${item.commune}`;
+        button.innerHTML = `<strong>${item.nom} </strong><br> ${item.adresse}, ${item.commune}`;
 
         button.addEventListener("click", () => {
             showCinemaInformations(item);
