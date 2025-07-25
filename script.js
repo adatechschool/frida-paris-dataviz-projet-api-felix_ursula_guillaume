@@ -1,6 +1,6 @@
 const addressInput = document.getElementById("addressInput");
 const suggestion = document.getElementById("suggestion");
-const radius = document.getElementById("radius");
+const userSearchRadius = document.getElementById("userSearchRadius");
 const form = document.getElementById("submissionForm");
 const cinemaList = document.getElementById("cinemaList");
 const resultAddress = document.getElementById("resultAddress");
@@ -14,9 +14,9 @@ let currentPage = 1;
 
 
 function affichCharge() {
-const chargement = document.createElement("p");
-chargement.innerText = "Chargement des cinémas à proximité…";
-loader.appendChild(chargement);
+    const chargement = document.createElement("p");
+    chargement.innerText = "Chargement des cinémas à proximité…";
+    loader.appendChild(chargement);
 }
 
 
@@ -25,7 +25,7 @@ form.addEventListener("submit", async (event) => {
     cinemaList.innerHTML = "";
     informationsPage.innerHTML = "";
     const address = addressInput.value;
-    const currentRadius = radius.value;
+    const currentRadius = userSearchRadius.value;
 
     const coordinates = await getCoordinates(address);
     if (!coordinates) {
@@ -33,15 +33,15 @@ form.addEventListener("submit", async (event) => {
         return;
     }
 
-    const { longitude, latitude, label } = coordinates;
+    const { userLongitude, userLatitude, label } = coordinates;
     resultAddress.innerText = `Cinémas trouvés à proximité de ${label} :`;
 
-    const cinemas = await getCinema(longitude, latitude, currentRadius);
+    const cinemas = await getCinema(userLongitude, userLatitude, currentRadius);
     if (cinemas.length === 0) {
         resultAddress.innerText = `Aucun cinéma trouvé à proximité de ${label} dans un rayon de ${currentRadius} km.`;
         return;
     }
-   
+
     displayCinema(cinemas);
 });
 
@@ -49,7 +49,7 @@ form.addEventListener("submit", async (event) => {
 
 
 async function getCoordinates(address) {
-     affichCharge();
+    affichCharge();
     const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address}`);
     const dataCoord = await responseCoord.json();
 
@@ -58,20 +58,33 @@ async function getCoordinates(address) {
     }
 
     const coord = dataCoord.features[0].geometry.coordinates;
-    const longitude = coord[0];
-    const latitude = coord[1];
+    const userLongitude = coord[0];
+    const userLatitude = coord[1];
     const label = dataCoord.features[0].properties.label;
 
-    return { longitude, latitude, label };
+    return { userLongitude, userLatitude, label };
 };
 
-async function getCinema(longitude, latitude, radius) {
+async function getCinema(userLongitude, userLatitude, userSearchRadius) {
     const responseCinema = await fetch(
-        `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom'POINT(${longitude}%20${latitude})'%2C%20${radius}km))&limit=20`
+        `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom%27POINT(${userLongitude}%20${userLatitude})%27%2C%20${userSearchRadius}km))&order_by=distance(%60geolocalisation%60%2C%20geom%27POINT(${userLongitude}%20${userLatitude})%27)%20ASC&limit=20`
     );
     const dataCinema = await responseCinema.json();
     return dataCinema.results;
 };
+
+function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+    const earthRadius = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const haversine =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const triangulationFactor = 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
+    return earthRadius * triangulationFactor;
+}
 
 function displayCinema(cinemas) {
 
@@ -83,7 +96,8 @@ function displayCinema(cinemas) {
     for (const item of cinemas) {
         const button = document.createElement("button");
         button.className = "cinemaButton";
-        button.innerHTML = `<strong>${item.nom}</strong><br> ${item.adresse}, ${item.commune}`;
+        button.innerHTML = `<strong>${item.nom}</strong><br/>${item.adresse}, ${item.commune}`;
+        //${getDistanceFromLatLonInKm(item.userLongitude, item.userLatitude, 48.820877967178234, 2.422979893258561)} km, 
 
         button.addEventListener("click", () => {
             showCinemaInformations(item);
@@ -106,7 +120,7 @@ function showCinemaInformations(cinema) {
         <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
         <p>Nombre d'écrans : ${cinema.ecrans}</p>
         <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
-        <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="500" frameborder="0"></iframe>
+        <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.userLatitude},${cinema.userLongitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
     `;
 };
 
