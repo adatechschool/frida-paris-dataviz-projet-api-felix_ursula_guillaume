@@ -35,12 +35,14 @@ body {
     display: block;
     text-align: center;
     
+    
 }
 
 #welcomeMsg {
     font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #ffffff;
+    
 }
 
 form {
@@ -48,6 +50,7 @@ form {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    
 }
 
 #addressInput {
@@ -56,6 +59,7 @@ form {
     border-radius: 25px;
     border: none;
     font-size: 1rem;
+    margin-top: 1.5em;
 }
 
 #suggestion {
@@ -74,7 +78,7 @@ form {
 }
 
 #suggestion div:hover {
-    background-color: #ecf0f1;
+    color: #f1c40f;
 }
 
 /* Slider */
@@ -84,14 +88,15 @@ input[type="range"] {
 
 output {
     font-weight: bold;
+    text-align: center;
 }
 
 /* Bouton soumission */
 #submissionBtn {
     padding: 0.6rem 1.2rem;
-    background-color: #27ae60;
+    background-color: #f1c40f;
     border: none;
-    color: white;
+    color: rgb(0, 0, 0);
     border-radius: 10px;
     cursor: pointer;
     font-size: 1rem;
@@ -99,7 +104,7 @@ output {
 }
 
 #submissionBtn:hover {
-    background-color: #2ecc71;
+    background-color: #f1c40f;
 }
 
 /* Résultats */
@@ -112,6 +117,7 @@ output {
     font-size: 1.2rem;
     margin-bottom: 1rem;
     color: #ffffff;
+    text-align: center;
 }
 
 #cinemaList {
@@ -130,6 +136,7 @@ output {
     width: 100%;
     cursor: pointer;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+   
 }
 
 .cinemaButton:hover {

@@ -12,11 +12,13 @@ const loader = document.getElementById("charger");
 
 let currentPage = 1;
 
+
 function affichCharge() {
 const chargement = document.createElement("p");
 chargement.innerText = "Chargement des cinémas à proximité…";
 loader.appendChild(chargement);
 }
+
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -43,6 +45,9 @@ form.addEventListener("submit", async (event) => {
     displayCinema(cinemas);
 });
 
+
+
+
 async function getCoordinates(address) {
      affichCharge();
     const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address}`);
@@ -62,7 +67,7 @@ async function getCoordinates(address) {
 
 async function getCinema(longitude, latitude, radius) {
     const responseCinema = await fetch(
-        `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom%27POINT(${longitude}%20${latitude})%27%2C%20${radius}km))&order_by=distance(%60geolocalisation%60%2C%20geom%27POINT(${longitude}%20${latitude})%27)%20ASC&limit=20`
+        `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom'POINT(${longitude}%20${latitude})'%2C%20${radius}km))&limit=20`
     );
     const dataCinema = await responseCinema.json();
     return dataCinema.results;
@@ -78,7 +83,7 @@ function displayCinema(cinemas) {
     for (const item of cinemas) {
         const button = document.createElement("button");
         button.className = "cinemaButton";
-        button.innerHTML = `<strong>${item.nom} </strong><br> ${item.adresse}, ${item.commune}`;
+        button.innerHTML = `<strong>${item.nom}</strong><br> ${item.adresse}, ${item.commune}`;
 
         button.addEventListener("click", () => {
             showCinemaInformations(item);
@@ -101,7 +106,7 @@ function showCinemaInformations(cinema) {
         <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
         <p>Nombre d'écrans : ${cinema.ecrans}</p>
         <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
-        <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
+        <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="500" frameborder="0"></iframe>
     `;
 };
 
@@ -116,7 +121,7 @@ function toPreviousPage() {
             previousButton.style.display = "none";
             searchPage.style.display = "block";
             currentPage = 1;
-        };
+        }
     });
 };
 toPreviousPage();
