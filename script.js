@@ -12,11 +12,13 @@ const loader = document.getElementById("charger");
 
 let currentPage = 1;
 
+
 function affichCharge() {
     const chargement = document.createElement("p");
     chargement.innerText = "Chargement des cinémas à proximité…";
     loader.appendChild(chargement);
 }
+
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -42,6 +44,9 @@ form.addEventListener("submit", async (event) => {
 
     displayCinema(cinemas);
 });
+
+
+
 
 async function getCoordinates(address) {
     affichCharge();
@@ -130,7 +135,7 @@ function toPreviousPage() {
             previousButton.style.display = "none";
             searchPage.style.display = "block";
             currentPage = 1;
-        };
+        }
     });
 };
 toPreviousPage();
