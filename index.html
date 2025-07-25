@@ -2,14 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CinéDuCoin</title>
     <script defer src="script.js" type="module"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"/>
 </head>
 
 <body>
+    <!-- Vidéo d'arrière-plan -->
+    <video autoplay loop muted playsinline class="video">
+        <source src="images/video.mp4" type="video/mp4"/>
+    </video>
+
     <div id="pagesBackground">
         <div id="searchPage">
             <h1 id=" welcomeMsg">Bienvenue dans CinéDuCoin</h1>
@@ -17,9 +22,9 @@
                 <label for="address">
                     <input type="search" id="addressInput" placeholder="Tapez une adresse" aria-required="true">
                 </label>
-                <div id="suggestion" ></div>
+                <div id="suggestion"></div>
 
-                <input type="range" id="radius" value="3" min="1" max="30"
+                <input type="range" id="userSearchRadius" value="3" min="1" max="30"
                     oninput="this.nextElementSibling.value = this.value">
                 <output>3</output>km<br />
                 <input type="submit" id="submissionBtn" name="submit">
@@ -34,7 +39,7 @@
         <div id="informationsPage">
         </div>
 
-        <button id="previousButton">Page précédente</button>
+        <button id="previousButton">page précédente</button>
     </div>
 </body>
 
