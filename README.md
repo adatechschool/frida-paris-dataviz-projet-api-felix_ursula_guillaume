@@ -1,12 +1,9 @@
-# Ciné du coin : Application web requête API
-
+# CinéDuCoin : Application web requête API
 ## à faire :
 Calculer les distances entre l'adresse saisie et chaque cinéma (l'afficher sur la liste des cinémas)
-Afficher les cinémas dans l'ordre de distance, le plus proche en premier
-
 ## 25/07/25
-
-
+Création d'une ébauche de style en CSS\
+Affichage des cinémas dans l'ordre de distance, le plus proche en premier
 ## 24/07/25
 Création des boutons de chaque cinéma dans le périmètre\
 Programmation du comportement des boutons pour qu'ils affichent les informations du cinéma séléctionné\
