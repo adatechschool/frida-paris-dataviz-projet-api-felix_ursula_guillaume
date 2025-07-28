@@ -37,7 +37,7 @@ form.addEventListener("submit", async (event) => {
         return;
     }
 
-    displayCinema(cinemas);
+    displayCinema(cinemas, userLongitude, userLatitude);
 });
 
 async function getCoordinates(address) {
@@ -84,7 +84,7 @@ addressInput.addEventListener("input", async function () {
         }
 
         data.features.forEach(feature => {
-                const newDiv = document.createElement("div");
+            const newDiv = document.createElement("div");
             newDiv.textContent = feature.properties.label;
             newDiv.style.cursor = "pointer";
             newDiv.addEventListener("click", () => {
@@ -112,7 +112,7 @@ async function getCinema(userLongitude, userLatitude, userSearchRadius) {
     };
 };
 
-function getDistanceFromCoordInKm(lat1, lon1, lat2, lon2) {
+function getDistanceFromCoord(lat1, lon1, lat2, lon2) {
     const earthRadius = 6371;
     const dLat = (lat2 - lat1) * Math.PI / 180;
     const dLon = (lon2 - lon1) * Math.PI / 180;
@@ -127,7 +127,7 @@ function getDistanceFromCoordInKm(lat1, lon1, lat2, lon2) {
 
 // à partir d'ici, ce sont les fonctions d'affichage
 
-function displayCinema(cinemas) {
+function displayCinema(cinemas, userLongitude, userLatitude) {
     currentPage = 2;
     searchPage.style.display = "none";
     loader.style.display = "none";
@@ -135,13 +135,10 @@ function displayCinema(cinemas) {
     resultPage.style.display = "block";
     previousButton.style.display = "block";
 
-
     for (const item of cinemas) {
         const button = document.createElement("button");
         button.className = "cinemaButton";
-        button.innerHTML = `<strong>${item.nom}</strong><br/>${item.adresse}, ${item.commune}`;
-        //${getDistanceFromCoordInKm(item.userLongitude, item.userLatitude, 48.820877967178234, 2.422979893258561)} km, 
-
+        button.innerHTML += `${item.nom}</strong><br/>${item.adresse}, ${item.commune}<br/>${getDistanceFromCoord(item.longitude, item.latitude, userLongitude, userLatitude).toFixed(2)} km`;
         button.addEventListener("click", () => {
             showCinemaInformations(item);
         });
@@ -153,7 +150,6 @@ function displayCinema(cinemas) {
 function showCinemaInformations(cinema) {
     currentPage = 3;
     resultPage.style.display = "none";
-    informationsPage.style.display = "block";
 
     informationsPage.innerHTML = `
         <h2 id="InformationsPageTitle">${cinema.nom}</h2>
