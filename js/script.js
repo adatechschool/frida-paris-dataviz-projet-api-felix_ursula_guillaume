@@ -157,6 +157,12 @@ function showCinemaInformations(cinema) {
         <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
         <p>Nombre d'écrans : ${cinema.ecrans}</p>
         <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
+        <p>Nombre de films par semaine : ${cinema.nombre_de_films_en_semaine_1}</p>
+        <p> Part de marché des films Français: ${cinema.pdm_en_entrees_des_films_francais.toFixed(2)}%</p>
+        <p> Part de marché des films Américains: ${cinema.pdm_en_entrees_des_films_americains.toFixed(2)}%</p>
+        <p> Part de marché des films Europeens: ${cinema.pdm_en_entrees_des_films_europeens.toFixed(2)}%</p>
+        <p> Part de marché des autres films: ${cinema.pdm_en_entrees_des_autres_films.toFixed(2)}%</p>
+
         <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
     `;
 };
