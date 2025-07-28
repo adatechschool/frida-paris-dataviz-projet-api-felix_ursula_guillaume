@@ -138,7 +138,7 @@ function displayCinema(cinemas, userLatitude, userLongitude) {
     for (const item of cinemas) {
         const button = document.createElement("button");
         button.className = "cinemaButton";
-        button.innerHTML += `${item.nom}</strong><br/>${item.adresse}, ${item.commune}<br/>${getDistanceFromCoord(item.longitude, item.latitude, userLongitude, userLatitude).toFixed(2)} km`;
+        button.innerHTML += `${item.nom}</strong><br/>${item.adresse}, ${item.commune}<br/>${getDistanceFromCoord(item.longitude, item.latitude, userLatitude, userLongitude).toFixed(2)} km`;
         button.addEventListener("click", () => {
             showCinemaInformations(item);
         });
