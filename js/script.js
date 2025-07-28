@@ -83,7 +83,7 @@ addressInput.addEventListener("input", async function () {
         }
 
         data.features.forEach(feature => {
-            const newDiv = document.createElement("div");
+                const newDiv = document.createElement("div");
             newDiv.textContent = feature.properties.label;
             newDiv.style.cursor = "pointer";
             newDiv.addEventListener("click", () => {
@@ -126,13 +126,14 @@ function getDistanceFromCoord(lat1, lon1, lat2, lon2) {
 
 // à partir d'ici, ce sont les fonctions d'affichage
 
-function displayCinema(cinemas, userLongitude, userLatitude) {
+function displayCinema(cinemas, userLatitude, userLongitude) {
     currentPage = 2;
     searchPage.style.display = "none";
     loader.style.display = "none";
     informationsPage.style.display = "none";
     resultPage.style.display = "block";
     previousButton.style.display = "block";
+
 
     for (const item of cinemas) {
         const button = document.createElement("button");
@@ -149,6 +150,7 @@ function displayCinema(cinemas, userLongitude, userLatitude) {
 function showCinemaInformations(cinema) {
     currentPage = 3;
     resultPage.style.display = "none";
+    informationsPage.style.display = "block";
 
     informationsPage.innerHTML = `
         <h2 id="InformationsPageTitle">${cinema.nom}</h2>
