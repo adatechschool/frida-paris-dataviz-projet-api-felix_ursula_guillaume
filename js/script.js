@@ -1,3 +1,5 @@
+import { displayLoader } from "./loader.js";
+
 const addressInput = document.getElementById("addressInput");
 const suggestion = document.getElementById("suggestion");
 const userSearchRadius = document.getElementById("userSearchRadius");
@@ -11,14 +13,6 @@ const previousButton = document.getElementById("previousButton");
 const loader = document.getElementById("charger");
 
 let currentPage = 1;
-
-
-function displayLoader() {
-    const chargement = document.createElement("p");
-    chargement.innerText = "Chargement des cinémas à proximité…";
-    loader.appendChild(chargement);
-}
-
 
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -45,9 +39,6 @@ form.addEventListener("submit", async (event) => {
     displayCinema(cinemas);
 });
 
-
-
-
 async function getCoordinates(address) {
     displayLoader();
     const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address}`);
@@ -64,83 +55,6 @@ async function getCoordinates(address) {
 
     return { userLongitude, userLatitude, label };
 };
-
-async function getCinema(userLongitude, userLatitude, userSearchRadius) {
-    const responseCinema = await fetch(
-        `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom%27POINT(${userLongitude}%20${userLatitude})%27%2C%20${userSearchRadius}km))&order_by=distance(%60geolocalisation%60%2C%20geom%27POINT(${userLongitude}%20${userLatitude})%27)%20ASC&limit=20`
-    );
-    const dataCinema = await responseCinema.json();
-    return dataCinema.results;
-};
-
-function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
-    const earthRadius = 6371;
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLon = (lon2 - lon1) * Math.PI / 180;
-    const haversine =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(lat1 * Math.PI / 180) *
-        Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const triangulationFactor = 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
-    return earthRadius * triangulationFactor;
-}
-
-function displayCinema(cinemas) {
-
-    currentPage = 2;
-    searchPage.style.display = "none";
-    resultPage.style.display = "block";
-    previousButton.style.display = "block";
-
-    for (const item of cinemas) {
-        const button = document.createElement("button");
-        button.className = "cinemaButton";
-        button.innerHTML = `<strong>${item.nom}</strong><br/>${item.adresse}, ${item.commune}`;
-        //${getDistanceFromLatLonInKm(item.userLongitude, item.userLatitude, 48.820877967178234, 2.422979893258561)} km, 
-
-        button.addEventListener("click", () => {
-            showCinemaInformations(item);
-        });
-
-        cinemaList.appendChild(button);
-        informationsPage.style.display = "block";
-        ;
-    }
-    loader.style.display = "none"
-}
-
-function showCinemaInformations(cinema) {
-
-    currentPage = 3;
-    resultPage.style.display = "none";
-
-    informationsPage.innerHTML = `
-        <h2 id="InformationsPageTitle">${cinema.nom}</h2>
-        <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
-        <p>Nombre d'écrans : ${cinema.ecrans}</p>
-        <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
-        <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.userLatitude},${cinema.userLongitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
-    `;
-};
-
-function toPreviousPage() {
-    previousButton.addEventListener("click", () => {
-        if (currentPage === 3) {
-            informationsPage.innerHTML= "";
-            informationsPage.style.display = "none";
-            resultPage.style.display = "block";
-            currentPage = 2;
-        } else if (currentPage === 2) {
-            cinemaList.innerHTML="";
-            resultPage.style.display = "none";
-            previousButton.style.display = "none";
-            searchPage.style.display = "block";
-            currentPage = 1;
-        }
-    });
-};
-toPreviousPage();
 
 addressInput.addEventListener("input", async function () {
     const inputAdded = addressInput.value.trim();
@@ -177,3 +91,80 @@ addressInput.addEventListener("input", async function () {
         suggestion.innerHTML = "<div>Erreur lors du chargement des suggestions</div>";
     }
 });
+
+async function getCinema(userLongitude, userLatitude, userSearchRadius) {
+    const responseCinema = await fetch(
+        `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom%27POINT(${userLongitude}%20${userLatitude})%27%2C%20${userSearchRadius}km))&order_by=distance(%60geolocalisation%60%2C%20geom%27POINT(${userLongitude}%20${userLatitude})%27)%20ASC&limit=20`
+    );
+    const dataCinema = await responseCinema.json();
+    return dataCinema.results;
+};
+
+function getDistanceFromCoordInKm(lat1, lon1, lat2, lon2) {
+    const earthRadius = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const haversine =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1 * Math.PI / 180) *
+        Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const triangulationFactor = 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1 - haversine));
+    return earthRadius * triangulationFactor;
+}
+
+// à partir d'ici, ce sont les fonctions d'affichage
+
+function displayCinema(cinemas) {
+    currentPage = 2;
+    searchPage.style.display = "none";
+    loader.style.display = "none";
+    resultPage.style.display = "block";
+    previousButton.style.display = "block";
+
+    for (const item of cinemas) {
+        const button = document.createElement("button");
+        button.className = "cinemaButton";
+        button.innerHTML = `<strong>${item.nom}</strong><br/>${item.adresse}, ${item.commune}`;
+        //${getDistanceFromCoordInKm(item.userLongitude, item.userLatitude, 48.820877967178234, 2.422979893258561)} km, 
+
+        button.addEventListener("click", () => {
+            showCinemaInformations(item);
+        });
+
+        cinemaList.appendChild(button);
+        informationsPage.style.display = "block";
+        ;
+    }
+}
+
+function showCinemaInformations(cinema) {
+    currentPage = 3;
+    resultPage.style.display = "none";
+
+    informationsPage.innerHTML = `
+        <h2 id="InformationsPageTitle">${cinema.nom}</h2>
+        <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
+        <p>Nombre d'écrans : ${cinema.ecrans}</p>
+        <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
+        <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
+    `;
+};
+
+function toPreviousPage() {
+    previousButton.addEventListener("click", () => {
+        if (currentPage === 3) {
+            informationsPage.innerHTML = "";
+            informationsPage.style.display = "none";
+            resultPage.style.display = "block";
+            currentPage = 2;
+        } else if (currentPage === 2) {
+            cinemaList.innerHTML = "";
+            resultPage.style.display = "none";
+            previousButton.style.display = "none";
+            searchPage.style.display = "block";
+            currentPage = 1;
+        }
+    });
+};
+toPreviousPage();
