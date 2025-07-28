@@ -1,4 +1,5 @@
 import { displayLoader } from "./loader.js";
+// import { displayCinema } from "./displayCinema.js";
 
 const addressInput = document.getElementById("addressInput");
 const suggestion = document.getElementById("suggestion");
