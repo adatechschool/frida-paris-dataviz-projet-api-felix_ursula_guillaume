@@ -40,20 +40,26 @@ form.addEventListener("submit", async (event) => {
 });
 
 async function getCoordinates(address) {
-    displayLoader();
-    const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address}`);
-    const dataCoord = await responseCoord.json();
+    try {
+        const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address.trim()}`);
+        if (!responseCoord.ok) throw new Error("Erreur lors de la récupération")
+        const dataCoord = await responseCoord.json();
 
-    if (!dataCoord.features || dataCoord.features.length === 0) {
-        return null;
-    }
+        if (!dataCoord.features || dataCoord.features.length === 0) {
+            return null;
+        }
 
-    const coord = dataCoord.features[0].geometry.coordinates;
-    const userLongitude = coord[0];
-    const userLatitude = coord[1];
-    const label = dataCoord.features[0].properties.label;
+        const coord = dataCoord.features[0].geometry.coordinates;
+        const userLongitude = coord[0];
+        const userLatitude = coord[1];
+        const label = dataCoord.features[0].properties.label;
 
-    return { userLongitude, userLatitude, label };
+        return { userLongitude, userLatitude, label };
+    } catch (error) {
+        console.error("Erreur :", error);
+    } finally {
+        displayLoader();
+    };
 };
 
 addressInput.addEventListener("input", async function () {
@@ -93,11 +99,16 @@ addressInput.addEventListener("input", async function () {
 });
 
 async function getCinema(userLongitude, userLatitude, userSearchRadius) {
-    const responseCinema = await fetch(
-        `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom%27POINT(${userLongitude}%20${userLatitude})%27%2C%20${userSearchRadius}km))&order_by=distance(%60geolocalisation%60%2C%20geom%27POINT(${userLongitude}%20${userLatitude})%27)%20ASC&limit=20`
-    );
-    const dataCinema = await responseCinema.json();
-    return dataCinema.results;
+    try {
+        const responseCinema = await fetch(
+            `https://data.culture.gouv.fr/api/explore/v2.1/catalog/datasets/etablissements-cinematographiques/records?where=(distance(%60geolocalisation%60%2C%20geom%27POINT(${userLongitude}%20${userLatitude})%27%2C%20${userSearchRadius}km))&order_by=distance(%60geolocalisation%60%2C%20geom%27POINT(${userLongitude}%20${userLatitude})%27)%20ASC&limit=20`
+        );
+        if (!responseCinema.ok) throw new Error("Erreur lors de la récupération");
+        const dataCinema = await responseCinema.json();
+        return dataCinema.results;
+    } catch (error) {
+        console.error("Erreur :", error);
+    };
 };
 
 function getDistanceFromCoordInKm(lat1, lon1, lat2, lon2) {
@@ -119,8 +130,10 @@ function displayCinema(cinemas) {
     currentPage = 2;
     searchPage.style.display = "none";
     loader.style.display = "none";
+    informationsPage.style.display = "none";
     resultPage.style.display = "block";
     previousButton.style.display = "block";
+
 
     for (const item of cinemas) {
         const button = document.createElement("button");
@@ -133,14 +146,13 @@ function displayCinema(cinemas) {
         });
 
         cinemaList.appendChild(button);
-        informationsPage.style.display = "block";
-        ;
-    }
-}
+    };
+};
 
 function showCinemaInformations(cinema) {
     currentPage = 3;
     resultPage.style.display = "none";
+    informationsPage.style.display = "block";
 
     informationsPage.innerHTML = `
         <h2 id="InformationsPageTitle">${cinema.nom}</h2>
