@@ -1,14 +1,13 @@
 # CinéDuCoin : Application web requête API
 ## à faire :
 Felix : Réparer la page InformationsPage qui ne se charge pas quand on est revenu une fois à la page précédente\
-Guillaume : Réparer la map de la page InformationsPage qui ne se charge plus\
 Ursula : réparer plus de contenu à extraire de l'API pour la page InformationsPage (reprendre la distance du ciné, les statistiques de diffusions)\
 Guillaume : Limiter l'affichage du loader à une seule fois, même si l'utilisateur appuie plusieurs fois sur recherche\
 Calculer les distances entre l'adresse saisie et chaque cinéma (l'afficher sur la liste des cinémas)\
 Refactoriser le code en plusieurs fichiers JS
 
 ## 28/07/23
-
+Réparer la map de la page InformationsPage qui ne se charge plus
 ## 25/07/25
 Création d'une ébauche de style en CSS\
 Affichage des cinémas dans l'ordre de distance, le plus proche en premier
