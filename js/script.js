@@ -83,7 +83,7 @@ addressInput.addEventListener("input", async function () {
         }
 
         data.features.forEach(feature => {
-            const newDiv = document.createElement("div");
+                const newDiv = document.createElement("div");
             newDiv.textContent = feature.properties.label;
             newDiv.style.cursor = "pointer";
             newDiv.addEventListener("click", () => {
