@@ -13,7 +13,7 @@ const loader = document.getElementById("charger");
 let currentPage = 1;
 
 
-function affichCharge() {
+function displayLoader() {
     const chargement = document.createElement("p");
     chargement.innerText = "Chargement des cinémas à proximité…";
     loader.appendChild(chargement);
@@ -49,7 +49,7 @@ form.addEventListener("submit", async (event) => {
 
 
 async function getCoordinates(address) {
-    affichCharge();
+    displayLoader();
     const responseCoord = await fetch(`https://data.geopf.fr/geocodage/search?q=${address}`);
     const dataCoord = await responseCoord.json();
 
@@ -127,10 +127,12 @@ function showCinemaInformations(cinema) {
 function toPreviousPage() {
     previousButton.addEventListener("click", () => {
         if (currentPage === 3) {
+            informationsPage.innerHTML= "";
             informationsPage.style.display = "none";
             resultPage.style.display = "block";
             currentPage = 2;
         } else if (currentPage === 2) {
+            cinemaList.innerHTML="";
             resultPage.style.display = "none";
             previousButton.style.display = "none";
             searchPage.style.display = "block";
@@ -161,7 +163,7 @@ addressInput.addEventListener("input", async function () {
         }
 
         data.features.forEach(feature => {
-            const newDiv = document.createElement("div");
+                const newDiv = document.createElement("div");
             newDiv.textContent = feature.properties.label;
             newDiv.style.cursor = "pointer";
             newDiv.addEventListener("click", () => {
