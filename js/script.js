@@ -168,7 +168,7 @@ function showCinemaInformations(cinema) {
     cinema.pdm_en_entrees_des_films_europeens,
     cinema.pdm_en_entrees_des_autres_films];
     if (window.pdmChartInstance) window.pdmChartInstance.destroy()
-        const canvas = document.getElementById("myChart");
+    const canvas = document.getElementById("myChart");
     new Chart(canvas, {
         type: 'doughnut',
         data: {
@@ -208,22 +208,3 @@ function toPreviousPage() {
     });
 };
 toPreviousPage();
-
-new Chart(canvas, {
-    type: 'bar',
-    data: {
-        labels: [],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
