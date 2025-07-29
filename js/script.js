@@ -1,4 +1,6 @@
 import { displayLoader } from "./loader.js";
+//import Chart from 'chart.js/auto';
+
 
 const addressInput = document.getElementById("addressInput");
 const suggestion = document.getElementById("suggestion");
@@ -11,7 +13,6 @@ const resultPage = document.getElementById("resultPage");
 const informationsPage = document.getElementById("informationsPage");
 const previousButton = document.getElementById("previousButton");
 const loader = document.getElementById("charger");
-
 let currentPage = 1;
 
 form.addEventListener("submit", async (event) => {
@@ -83,7 +84,7 @@ addressInput.addEventListener("input", async function () {
         }
 
         data.features.forEach(feature => {
-                const newDiv = document.createElement("div");
+            const newDiv = document.createElement("div");
             newDiv.textContent = feature.properties.label;
             newDiv.style.cursor = "pointer";
             newDiv.addEventListener("click", () => {
@@ -158,13 +159,36 @@ function showCinemaInformations(cinema) {
         <p>Nombre d'écrans : ${cinema.ecrans}</p>
         <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
         <p>Nombre de films par semaine : ${cinema.nombre_de_films_en_semaine_1}</p>
-        <p> Part de marché des films Français: ${cinema.pdm_en_entrees_des_films_francais.toFixed(2)}%</p>
-        <p> Part de marché des films Américains: ${cinema.pdm_en_entrees_des_films_americains.toFixed(2)}%</p>
-        <p> Part de marché des films Europeens: ${cinema.pdm_en_entrees_des_films_europeens.toFixed(2)}%</p>
-        <p> Part de marché des autres films: ${cinema.pdm_en_entrees_des_autres_films.toFixed(2)}%</p>
-
+        <canvas id="myChart" width="350" height="230"></canvas>
         <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
     `;
+    const pdmLabels = ["Films Français", "Films Américains", " Films Europeens", "Autres Films"];
+    const pdmValues = [cinema.pdm_en_entrees_des_films_francais,
+    cinema.pdm_en_entrees_des_films_americains,
+    cinema.pdm_en_entrees_des_films_europeens,
+    cinema.pdm_en_entrees_des_autres_films];
+    if (window.pdmChartInstance) window.pdmChartInstance.destroy()
+        const canvas = document.getElementById("myChart");
+    new Chart(canvas, {
+        type: 'doughnut',
+        data: {
+            labels: pdmLabels,
+            datasets: [{
+                label: "Part de marché (%)",
+                data: pdmValues,
+                borderWidth: 1,
+                backgroundColor: [
+                    "#08528fff", "#C0392B", "#45B39D", "#F4D03F"
+                ]
+            }]
+        },
+        options: {
+            responsive: false,
+            scales: {
+                y: { beginAtZero: true, max: 100 }
+            }
+        }
+    });
 };
 
 function toPreviousPage() {
@@ -184,3 +208,22 @@ function toPreviousPage() {
     });
 };
 toPreviousPage();
+
+new Chart(canvas, {
+    type: 'bar',
+    data: {
+        labels: [],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
