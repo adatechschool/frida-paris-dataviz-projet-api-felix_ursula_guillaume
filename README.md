@@ -1,9 +1,11 @@
 # CinéDuCoin : Application web requête API
 ## à faire :
 Guillaume : Limiter l'affichage du loader à une seule fois, même si l'utilisateur appuie plusieurs fois sur recherche\
-Refactoriser le code en plusieurs fichiers JS
+(Refactoriser le code en plusieurs fichiers JS)
 
-## 28/07/23
+## 29/07/25
+Création du logo et implémentation de celui-ci dans la page d'accueil
+## 28/07/25
 Réparer la map de la page InformationsPage qui ne se charge plus\
 Réparer la page InformationsPage qui ne se charge pas quand on est revenu une fois à la page précédente\
 Calculer les distances entre l'adresse saisie et chaque cinéma (l'afficher sur la liste des cinémas)\
