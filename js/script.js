@@ -163,7 +163,7 @@ function showCinemaInformations(cinema) {
         <p> Part de marché des films Europeens: ${cinema.pdm_en_entrees_des_films_europeens.toFixed(2)}%</p>
         <p> Part de marché des autres films: ${cinema.pdm_en_entrees_des_autres_films.toFixed(2)}%</p>
 
-        <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe>
+        <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="350" height="400" frameborder="0"></iframe>
     `;
 };
 
