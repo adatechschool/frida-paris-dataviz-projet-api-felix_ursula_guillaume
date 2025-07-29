@@ -19,10 +19,11 @@ body {
 }
 
 #pagesBackground {
-    width: 90%;
+    width: 110%;
     max-width: 900px;
+    height: 800;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 2rem;
+    padding: 3.5rem;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
     
@@ -30,16 +31,19 @@ body {
 
 /* Page d'accueil */
 #searchPage {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    
-    
+    gap: 1.5rem;
 }
 
 #welcomeMsg {
     font-size: 2rem;
     margin-bottom: 1.5rem;
     color: #ffffff;
+    text-align: center;
     
 }
 
@@ -48,15 +52,16 @@ form {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    
+    width: 100%;
 }
 
 #addressInput {
-    width: 120%;
-    padding: 0.7rem;
+    width: 100%;
+    max-width: 600px;         /* largeur max pour les grands écrans */
+    padding: 1rem 1.5rem;     /* plus de hauteur */
     border-radius: 25px;
     border: none;
-    font-size: 1rem;
+    font-size: 1.2rem;        /* texte plus grand */
     margin-top: 1.5em;
 }
 
@@ -81,12 +86,25 @@ form {
 
 /* Slider */
 input[type="range"] {
-    width: 80%;
+    width: 300px;
+    height: 8px;
+    appearance: none;
+    background: #ffffff;
+    margin-right: 0.4rem;
+    margin-left: 0.5rem;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+span {
+    font-size: 1.3rem;
 }
 
 output {
     font-weight: bold;
     text-align: center;
+    font-size: 1.3rem;
 }
 
 /* Bouton soumission */
@@ -150,23 +168,37 @@ output {
 }
 
 #InformationsPageTitle {
+    position: relative;
+    top: 200px;
     font-size: 1.8rem;
     margin-bottom: 1rem;
     color: #ffffff;
+    text-align: left;
+    margin-left: 60%;
 }
 
 #informationsPage p {
+    position: relative;
+    top: 200px;
     margin: 0.5rem 0;
+    text-align: left;
+    margin-left: 60%;
 }
 
 iframe {
+    position: relative;
+    bottom: 170px;
     margin-top: 1rem;
     max-width: 100%;
     border-radius: 15px;
+    align-items: left;
+    margin-right: 40%;
 }
 
 /* Bouton retour */
 #previousButton {
+    /* position: relative;
+    bottom: 100px; */
     display: none;
     margin-top: 2rem;
     padding: 0.5rem 1rem;
@@ -199,4 +231,13 @@ iframe {
     min-height: 100%;
     z-index: -1;
     object-fit: cover;
+}
+
+#logo {
+    max-width: 100%;
+    width: 400px;
+    height: auto;
+    display: block;
+    margin: 0 auto 1rem;
+    align-items: center;
 }
