@@ -181,6 +181,10 @@ output {
     text-align: left;
 }
 
+#informationsPage a {
+    color:#f1c40f;
+}
+
 iframe {
     margin-top: 1rem;
     width: 100%;
