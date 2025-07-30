@@ -82,7 +82,7 @@ addressInput.addEventListener("input", async function () {
         }
 
         data.features.forEach(feature => {
-            const newDiv = document.createElement("div");
+                const newDiv = document.createElement("div");
             newDiv.textContent = feature.properties.label;
             newDiv.style.cursor = "pointer";
             newDiv.addEventListener("click", () => {
@@ -194,50 +194,6 @@ function showCinemaInformations(cinema) {
         }
     });
 };
-
-// function showCinemaInformations(cinema) {
-//     currentPage = 3;
-//     resultPage.style.display = "none";
-//     informationsPage.style.display = "block";
-
-//     informationsPage.innerHTML = `
-//         <h2 id="InformationsPageTitle">${cinema.nom}</h2>
-//         <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
-//         <p>Nombre d'écrans : ${cinema.ecrans}</p>
-//         <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
-//         <p>Nombre de films par semaine : ${cinema.nombre_de_films_en_semaine_1}</p>
-//         <p><a href="https://www.google.com/search?q=${cinema.nom.replace(" ", "+")}+${cinema.commune.replace(" ", "+")}" target="_blank">Trouver ce cinéma sur Google Search</a></p>
-//         <p><canvas id="myChart" width="350" height="230"></canvas></p>
-//         <p><iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="350" height="600" frameborder="0"></iframe></p>
-//     `;
-//     const pdmLabels = ["Films Français", "Films Américains", " Films Europeens", "Autres Films"];
-//     const pdmValues = [cinema.pdm_en_entrees_des_films_francais,
-//     cinema.pdm_en_entrees_des_films_americains,
-//     cinema.pdm_en_entrees_des_films_europeens,
-//     cinema.pdm_en_entrees_des_autres_films];
-//     if (window.pdmChartInstance) window.pdmChartInstance.destroy()
-//     const canvas = document.getElementById("myChart");
-//     new Chart(canvas, {
-//         type: 'doughnut',
-//         data: {
-//             labels: pdmLabels,
-//             datasets: [{
-//                 label: "Part de marché (%)",
-//                 data: pdmValues,
-//                 borderWidth: 1,
-//                 backgroundColor: [
-//                     "#08528fff", "#C0392B", "#45B39D", "#F4D03F"
-//                 ]
-//             }]
-//         },
-//         options: {
-//             responsive: false,
-//             scales: {
-//                 y: { beginAtZero: true, max: 100 }
-//             }
-//         }
-//     });
-// };
 
 function toPreviousPage() {
     previousButton.addEventListener("click", () => {
