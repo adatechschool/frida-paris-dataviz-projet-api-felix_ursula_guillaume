@@ -1,37 +1,24 @@
-/* Reset de base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-    background: linear-gradient(to right, #ffffff, #ffffff);
+    background-color:#ffffff;
     color: #fff;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background: url("images/collage-de-fond-de-film.jpg");
-    background-repeat: no-repeat;
-    background-size: cover; */
 }
 
 #pagesBackground {
-    width: 110%;
     max-width: 900px;
-    height: 800;
     background-color: rgba(0, 0, 0, 0.8);
     padding: 3.5rem;
-    border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-
+    border-radius: 20px;
 }
 
-/* Page d'accueil */
 #searchPage {
     display: flex;
+    margin-top: 1rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -41,10 +28,9 @@ body {
 
 #welcomeMsg {
     font-size: 2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     color: #ffffff;
     text-align: center;
-
 }
 
 form {
@@ -65,7 +51,6 @@ form {
     border: none;
     font-size: 1.2rem;
     /* texte plus grand */
-    margin-top: 1.5em;
 }
 
 #suggestion {
@@ -119,11 +104,12 @@ output {
     border-radius: 10px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease;
 }
 
 #submissionBtn:hover {
-    background-color: #f1c40f;
+    background-color: #e8d176;    
+    transition: background-color 0.3s ease;
 }
 
 /* Résultats */
@@ -163,56 +149,61 @@ output {
     background: none;
 }
 
-/* Informations cinéma */
 #informationsPage {
     display: none;
     margin-top: 1rem;
-    text-align: center;
 }
 
 #InformationsPageTitle {
-    position: relative;
-    top: 200px;
     font-size: 1.8rem;
     margin-bottom: 1rem;
     color: #ffffff;
     text-align: left;
-    margin-left: 60%;
+}
+
+#informationsPage .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+#informationsPage .info-section {
+    flex: 1;
+    min-width: 250px;
+    padding-left: 1rem;
+    text-align: left;
 }
 
 #informationsPage p {
-    position: relative;
-    top: 200px;
     margin: 0.5rem 0;
     text-align: left;
-    margin-left: 60%;
 }
 
 iframe {
-    position: relative;
-    bottom: 170px;
     margin-top: 1rem;
+    width: 100%;
     max-width: 100%;
     border-radius: 15px;
-    align-items: left;
-    margin-right: 40%;
+    
+    aspect-ratio: 4 / 3;
+    height: auto;
 }
 
 #myChart {
-    position: relative;
-    align-items: right;
-
+    width: 350px; 
+    height: 230px;
+    flex-shrink: 0;
 }
 
 /* Bouton retour */
 #previousButton {
-    /* position: relative;
-    bottom: 100px; */
     display: none;
     margin-top: 2rem;
     padding: 0.5rem 1rem;
-    background-color: rgb(24, 2, 31);
-    color: white;
+    background-color:#f1c40f;
+    color: black;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -221,11 +212,12 @@ iframe {
 }
 
 #previousButton:hover {
-    background-color: #1c0326;
+    background-color: #e8d176;
+    transition: background-color 0.3s ease;
 }
 
 /* Chargement */
-#charger p {
+#loader p {
     margin-top: 1rem;
     font-style: italic;
     color: #bdc3c7;

@@ -11,7 +11,6 @@
 </head>
 
 <body>
-    <!-- Vidéo d'arrière-plan -->
     <video autoplay loop muted playsinline class="video">
         <source src="images/video.mp4" type="video/mp4" />
     </video>
@@ -19,13 +18,12 @@
     <div id="pagesBackground">
         <div id="searchPage">
             <img id="logo" src="images/LOGO FINAL.svg" alt="Logo Ciné">
-            <h1 id=" welcomeMsg">Bienvenue dans CinéDuCoin</h1>
+            <h2 id=" welcomeMsg">Trouvez des cinémas à proximité de chez vous</h2>
             <form id="submissionForm">
                 <label for="address">
                     <input type="search" id="addressInput" placeholder="Tapez une adresse" aria-required="true">
                 </label>
                 <div id="suggestion"></div>
-
                 <span><input type="range" id="userSearchRadius" value="3" min="1" max="20"
                         oninput="this.nextElementSibling.value = this.value">
                     <output>3</output>km</span>
@@ -33,14 +31,29 @@
                 <input type="submit" id="submissionBtn" name="submit">
             </form>
         </div>
-        <div id="charger"></div>
+        <div id="loader"></div>
         <div id="resultPage">
             <h2 id="resultAddress"></h2>
             <ul id="cinemaList"></ul>
         </div>
 
         <div id="informationsPage">
+            <h2 id="InformationsPageTitle"></h2>
+            <div class="content-wrapper">
+                <p><canvas id="myChart" width="350" height="230"></canvas></p>
+                <div class="info-section">
+                    <p>Adresse : </p>
+                    <p>Nombre d'écrans : </p>
+                    <p>Nombre de fauteuils : </p>
+                    <p>Nombre de films par semaine : </p>
+                    <p><a href="#" target="_blank">Trouver ce cinéma sur Google Search</a></p>
+                </div>
+            </div>
+            <p><iframe src="" width="350" height="600" frameborder="0"></iframe></p>
         </div>
+
+        <!-- <div id="informationsPage">
+        </div> -->
         <button id="previousButton">page précédente</button>
     </div>
 </body>

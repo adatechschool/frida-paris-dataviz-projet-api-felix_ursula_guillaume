@@ -1,10 +1,12 @@
-# CinéDuCoin : Application web requête API
-## à faire :
-Guillaume : Limiter l'affichage du loader à une seule fois, même si l'utilisateur appuie plusieurs fois sur recherche\
-(Refactoriser le code en plusieurs fichiers JS)
+# CinéDuCoin : Application web requêtes API
 
+## 30/07/25
+Limiter l'affichage du loader à une seule fois, même si l'utilisateur appuie plusieurs fois sur recherche\
+Faire marcher des liens externes vers d'autres sites\
+Améliorer la mise en page d'informationsPage
 ## 29/07/25
 Création du logo et implémentation de celui-ci dans la page d'accueil
+Ajout d'une pie chart en doughnut pour l'es parts de marché des cinémas (français, américains, européens, autres)\
 ## 28/07/25
 Réparer la map de la page InformationsPage qui ne se charge plus\
 Réparer la page InformationsPage qui ne se charge pas quand on est revenu une fois à la page précédente\
