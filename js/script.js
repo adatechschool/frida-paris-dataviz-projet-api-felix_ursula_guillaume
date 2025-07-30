@@ -194,7 +194,7 @@ function showCinemaInformations(cinema) {
         labels: {
           color: 'white',    
           font: {
-            size: 14        
+            size: 14
           }
         }
       }
