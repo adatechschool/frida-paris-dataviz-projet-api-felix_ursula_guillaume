@@ -161,7 +161,8 @@ function showCinemaInformations(cinema) {
                 <p>Nombre d'écrans : ${cinema.ecrans}</p>
                 <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
                 <p>Nombre de films par semaine : ${cinema.nombre_de_films_en_semaine_1}</p>
-                <p><a href="https://www.google.com/search?q=${cinema.nom.replace(/ /g, "+")}+${cinema.commune.replace(/ /g, "+")}" target="_blank">Trouver ce cinéma sur Google Search</a></p>
+                <p><a href="https://www.google.com/search?q=${cinema.nom.replace(/ /g, "+")}+${cinema.commune.replace(/ /g, "+")}&btnI=I'm Feeling Lucky" target="_blank">Site du cinéma</a></p>
+                <p><a href="https://www.google.com/search?q=${cinema.nom.replace(/ /g, "+")}+${cinema.commune.replace(/ /g, "+")}" target="_blank">Rechercher ce cinéma sur Google</a></p>
             </div>
         </div>
         <p><iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" frameborder="0"></iframe></p>
