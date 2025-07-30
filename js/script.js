@@ -175,27 +175,34 @@ function showCinemaInformations(cinema) {
     cinema.pdm_en_entrees_des_autres_films];
     if (window.pdmChartInstance) window.pdmChartInstance.destroy()
     const canvas = document.getElementById("myChart");
-    new Chart(canvas, {
-        type: 'doughnut',
-        data: {
-            labels: pdmLabels,
-            datasets: [{
-                label: "Part de marché (%)",
-                data: pdmValues,
-                borderWidth: 1,
-                backgroundColor: [
-                    "#08528fff", "#C0392B", "#45B39D", "#F4D03F"
-                ]
-            }]
-        },
-        options: {
-            responsive: false,
-            scales: {
-                y: { beginAtZero: true, max: 100 }
-            }
+    window.pdmChartInstance = new Chart(canvas, {
+  type: 'doughnut',
+  data: {
+    labels: pdmLabels,
+    datasets: [{
+      label: "Part de marché (%)",
+      data: pdmValues,
+      borderWidth: 1,
+      backgroundColor: [
+        "#08528fff", "#C0392B", "#45B39D", "#F4D03F"
+      ]
+    }]
+  },
+  options: {
+    responsive: false,
+    plugins: {
+      legend: {
+        labels: {
+          color: 'white',    
+          font: {
+            size: 14        
+          }
         }
-    });
-};
+      }
+    }
+    
+  }
+});
 
 function toPreviousPage() {
     previousButton.addEventListener("click", () => {
@@ -213,4 +220,4 @@ function toPreviousPage() {
         }
     });
 };
-toPreviousPage();
+toPreviousPage();}
