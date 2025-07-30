@@ -21,7 +21,6 @@ body {
 #pagesBackground {
     width: 110%;
     max-width: 900px;
-    height: 800;
     background-color: rgba(0, 0, 0, 0.8);
     padding: 3.5rem;
     border-radius: 20px;
@@ -171,9 +170,10 @@ output {
 }
 
 #InformationsPageTitle {
-    position: relative;
-    top: 200px;
+    /* position: relative;
+    top: 50px; */
     font-size: 1.8rem;
+    margin-right: 2rem;
     margin-bottom: 1rem;
     color: #ffffff;
     text-align: left;
@@ -181,20 +181,20 @@ output {
 }
 
 #informationsPage p {
-    position: relative;
-    top: 200px;
-    margin: 0.5rem 0;
+    /* position: relative;
+    top: 50px; */
+    margin-right: 2rem;
+    /* margin: 0.5rem 0 0 1; */
     text-align: left;
     margin-left: 60%;
 }
 
 iframe {
     position: relative;
-    bottom: 170px;
-    margin-top: 1rem;
+    display: flex;
+    /* margin-top: 1rem; */
     max-width: 100%;
     border-radius: 15px;
-    align-items: left;
     margin-right: 40%;
 }
 
@@ -225,7 +225,7 @@ iframe {
 }
 
 /* Chargement */
-#charger p {
+#loading p {
     margin-top: 1rem;
     font-style: italic;
     color: #bdc3c7;

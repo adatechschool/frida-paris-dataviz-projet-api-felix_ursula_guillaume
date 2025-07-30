@@ -1,7 +1,8 @@
-const loader = document.getElementById("charger");
+const loader = document.getElementById("loading");
 
 export function displayLoader() {
-    const chargement = document.createElement("p");
-    chargement.innerText = "Chargement des cinémas à proximité…";
-    loader.appendChild(chargement);
+    loader.innerHTML = "";
+    const loading = document.createElement("p");
+    loading.innerText = "Chargement des cinémas à proximité…";
+    loader.appendChild(loading);
 }

@@ -10,7 +10,7 @@ const searchPage = document.getElementById("searchPage");
 const resultPage = document.getElementById("resultPage");
 const informationsPage = document.getElementById("informationsPage");
 const previousButton = document.getElementById("previousButton");
-const loader = document.getElementById("charger");
+const loader = document.getElementById("loading");
 
 let currentPage = 1;
 
@@ -130,6 +130,7 @@ function displayCinema(cinemas, userLatitude, userLongitude) {
     currentPage = 2;
     searchPage.style.display = "none";
     loader.style.display = "none";
+    // loader.innerHTML = ""; 
     informationsPage.style.display = "none";
     resultPage.style.display = "block";
     previousButton.style.display = "block";
@@ -158,12 +159,9 @@ function showCinemaInformations(cinema) {
         <p>Nombre d'écrans : ${cinema.ecrans}</p>
         <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
         <p>Nombre de films par semaine : ${cinema.nombre_de_films_en_semaine_1}</p>
-        <p> Part de marché des films Français: ${cinema.pdm_en_entrees_des_films_francais.toFixed(2)}%</p>
-        <p> Part de marché des films Américains: ${cinema.pdm_en_entrees_des_films_americains.toFixed(2)}%</p>
-        <p> Part de marché des films Europeens: ${cinema.pdm_en_entrees_des_films_europeens.toFixed(2)}%</p>
-        <p> Part de marché des autres films: ${cinema.pdm_en_entrees_des_autres_films.toFixed(2)}%</p>
-
-        <iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="350" height="400" frameborder="0"></iframe>
+                <p><a href="https://www.google.com/search?q${cinema.nom.replace(" ", "+")}+${cinema.commune.replace(" ", "+")}" target="_blank">Trouver ce cinéma sur Google Search</a></p>
+        <p><canvas id="myChart" width="350" height="230"></canvas></p>
+        <p><iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe></p>
     `;
     const pdmLabels = ["Films Français", "Films Américains", " Films Europeens", "Autres Films"];
     const pdmValues = [cinema.pdm_en_entrees_des_films_francais,
