@@ -10,8 +10,7 @@ const searchPage = document.getElementById("searchPage");
 const resultPage = document.getElementById("resultPage");
 const informationsPage = document.getElementById("informationsPage");
 const previousButton = document.getElementById("previousButton");
-const loader = document.getElementById("loading");
-
+const loader = document.getElementById("loader");
 let currentPage = 1;
 
 form.addEventListener("submit", async (event) => {
@@ -128,6 +127,7 @@ function getDistanceFromCoord(lat1, lon1, lat2, lon2) {
 
 function displayCinema(cinemas, userLatitude, userLongitude) {
     currentPage = 2;
+    loader.innerHTML = "";
     searchPage.style.display = "none";
     loader.style.display = "none";
     // loader.innerHTML = ""; 
@@ -155,13 +155,17 @@ function showCinemaInformations(cinema) {
 
     informationsPage.innerHTML = `
         <h2 id="InformationsPageTitle">${cinema.nom}</h2>
-        <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
-        <p>Nombre d'écrans : ${cinema.ecrans}</p>
-        <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
-        <p>Nombre de films par semaine : ${cinema.nombre_de_films_en_semaine_1}</p>
-                <p><a href="https://www.google.com/search?q${cinema.nom.replace(" ", "+")}+${cinema.commune.replace(" ", "+")}" target="_blank">Trouver ce cinéma sur Google Search</a></p>
-        <p><canvas id="myChart" width="350" height="230"></canvas></p>
-        <p><iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" width="600" height="600" frameborder="0"></iframe></p>
+        <div class="content-wrapper">
+            <p><canvas id="myChart" width="350" height="230"></canvas></p>
+            <div class="info-section">
+                <p>Adresse : ${cinema.adresse}, ${cinema.commune}</p>
+                <p>Nombre d'écrans : ${cinema.ecrans}</p>
+                <p>Nombre de fauteuils : ${cinema.fauteuils}</p>
+                <p>Nombre de films par semaine : ${cinema.nombre_de_films_en_semaine_1}</p>
+                <p><a href="https://www.google.com/search?q=${cinema.nom.replace(/ /g, "+")}+${cinema.commune.replace(/ /g, "+")}" target="_blank">Trouver ce cinéma sur Google Search</a></p>
+            </div>
+        </div>
+        <p><iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" frameborder="0"></iframe></p>
     `;
     const pdmLabels = ["Films Français", "Films Américains", " Films Europeens", "Autres Films"];
     const pdmValues = [cinema.pdm_en_entrees_des_films_francais,
@@ -192,9 +196,6 @@ function showCinemaInformations(cinema) {
     });
 };
 
-
-
-
 function toPreviousPage() {
     previousButton.addEventListener("click", () => {
         if (currentPage === 3) {
@@ -206,7 +207,7 @@ function toPreviousPage() {
             cinemaList.innerHTML = "";
             resultPage.style.display = "none";
             previousButton.style.display = "none";
-            searchPage.style.display = "block";
+            searchPage.style.display = "flex";
             currentPage = 1;
         }
     });
