@@ -130,6 +130,7 @@ function displayCinema(cinemas, userLatitude, userLongitude) {
     loader.innerHTML = "";
     searchPage.style.display = "none";
     loader.style.display = "none";
+    // loader.innerHTML = ""; 
     informationsPage.style.display = "none";
     resultPage.style.display = "block";
     previousButton.style.display = "block";
