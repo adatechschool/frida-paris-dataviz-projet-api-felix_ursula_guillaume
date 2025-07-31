@@ -3,7 +3,8 @@
 ## 30/07/25
 Limiter l'affichage du loader à une seule fois, même si l'utilisateur appuie plusieurs fois sur recherche\
 Faire marcher des liens externes vers d'autres sites\
-Améliorer la mise en page d'informationsPage
+Améliorer la mise en page d'informationsPage\
+Mise en page du graphique avec de nouvelles couleurs et taille de texte
 ## 29/07/25
 Création du logo et implémentation de celui-ci dans la page d'accueil
 Ajout d'une pie chart en doughnut pour l'es parts de marché des cinémas (français, américains, européens, autres)\
