@@ -166,7 +166,7 @@ function showCinemaInformations(cinema, distanceInKms) {
                 <p><a href="https://www.google.com/search?q=${cinema.nom.replace(/ /g, "+")}+${cinema.commune.replace(/ /g, "+")}" target="_blank">Rechercher ce cinéma sur Google</a></p>
             </div>
         </div>
-        <p><iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=18,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" frameborder="0"></iframe></p>
+        <p><iframe src="https://data.culture.gouv.fr/explore/embed/dataset/etablissements-cinematographiques/map/?location=16,${cinema.latitude},${cinema.longitude}&static=true&datasetcard=false&scrollWheelZoom=false" frameborder="0"></iframe></p>
     `;
     const pdmLabels = ["Films Français", "Films Américains", " Films Europeens", "Autres Films"];
     const pdmValues = [cinema.pdm_en_entrees_des_films_francais,
