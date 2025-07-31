@@ -130,7 +130,6 @@ function displayCinema(cinemas, userLatitude, userLongitude) {
     loader.innerHTML = "";
     searchPage.style.display = "none";
     loader.style.display = "none";
-    // loader.innerHTML = ""; 
     informationsPage.style.display = "none";
     resultPage.style.display = "block";
     previousButton.style.display = "block";
@@ -139,7 +138,7 @@ function displayCinema(cinemas, userLatitude, userLongitude) {
     for (const item of cinemas) {
         const button = document.createElement("button");
         button.className = "cinemaButton";
-        button.innerHTML += `${item.nom}</strong><br/>${item.adresse}, ${item.commune}<br/>${getDistanceFromCoord(item.longitude, item.latitude, userLatitude, userLongitude).toFixed(2)} km`;
+        button.innerHTML += `<strong>${item.nom}</strong><br/>${item.adresse}, ${item.commune}<br/>${getDistanceFromCoord(item.longitude, item.latitude, userLatitude, userLongitude).toFixed(2)} km`;
         button.addEventListener("click", () => {
             showCinemaInformations(item);
         });
